@@ -5,9 +5,11 @@
 Threads control using wait/notify. Producer/Consumer
 1. Execute and check how the program works, Execute jVisualVM and inspect the CPU use of the corresponding process.
 - What is the reason of this CPU consumption?
-![Alt text](/img/Parte1JVisualVM1.png)
-![Alt text](/img/Parte1JVisualVM2.png)
-![Alt text](/img/Parte1JVisualVM3.png)
+![Alt text](/img/Parte1JVisualVM1.PNG)
+
+![Alt text](/img/Parte1JVisualVM2.PNG)
+
+![Alt text](/img/Parte1JVisualVM3.PNG)
 
 - What is the class responsable of that consumption?
 
@@ -15,8 +17,9 @@ Threads control using wait/notify. Producer/Consumer
 
 2. Write some code in order to solve the CPU's use problems , having in mind  that for now the production is slow and the consumption is fast, check that the CPU consumption has decreased.
 
-![Alt text](/img/Parte1ConsumoCPU1.png)
-![Alt text](/img/Parte1ConsumoCPU2.png)
+![Alt text](/img/Parte1ConsumoCPU1.PNG)
+
+![Alt text](/img/Parte1ConsumoCPU2.PNG)
 
 3. Make a producer that produces as fast as it can, and the consumer consumes slow, keeping in mind that the producer knows a Stock limit (how many elements have to have at most in the queue) your code has to respect that limit.Check the Collection API used as queue in order to validate that the limit not be exceeded.Verify that when you set a small limit in the stock, there is not a high CPU consumption or errors. So that, altogether we are exploring the total of servers
 
