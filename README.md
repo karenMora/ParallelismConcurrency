@@ -40,9 +40,14 @@ Synchronization and deadlocks
 * Each player, permanently, attacks other inmortal. The firstone who attacks substract m  life points to the opponent, and increase in the same quantity his life points.
 * The game could never have  an unique winner. The most likely thing is that in the end there are only two, fighting forever substracting and adding lifepoints
 
+![Alt text](/img/Highlander.png)
+
+---> solo funciona el boton "Start"
+![Alt text](/img/HighlanderStart.png)
+
 2. Check the code and identify how the indicated funcionality was implemented. Given the purpose of the game, an invariant should be that the sum of the life points of all the players always be the same.(Of course, in a moment of time when an operation of increase / reduction of time is not in process). For that case, for N players, what should be that value?
 
---->
+---> START: se crea el boton y el Action listener correspondiente  el cual recorre todos los inmortales  los "enciende", coloca los hilos a funcionar y tiene una bandera para saber que el juego ya empezo y no se pueda oprimir dos veces seguidas el boton start.
 
 3. Run the application and verify how the "pause and check" option works, is the invariant satisfied?
 
