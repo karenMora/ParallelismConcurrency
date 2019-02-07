@@ -19,7 +19,7 @@ public class Consumer extends Thread{
     
     
     public Consumer(Queue<Integer> queue){
-        this.queue=queue;        
+        this.queue=queue;
     }
     
     @Override

@@ -71,13 +71,17 @@ public class ControlFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 immortals = setupInmortals();
-
+                
+                int suma=0;
+                
                 if (immortals != null) {
                     for (Immortal im : immortals) {
                         im.start();
+                        suma+= im.getHealth();
+                        System.out.println("----------------> PUNTOS TOTALES= "+suma);
+                        System.out.println("----------------> VIDA= "+im.getHealth());
                     }
                 }
-
                 btnStart.setEnabled(false);
 
             }
