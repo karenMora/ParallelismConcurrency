@@ -5,14 +5,18 @@
 Threads control using wait/notify. Producer/Consumer
 1. Execute and check how the program works, Execute jVisualVM and inspect the CPU use of the corresponding process.
 - What is the reason of this CPU consumption?
-
---->
+![Alt text](/img/Parte1JVisualVM1.png)
+![Alt text](/img/Parte1JVisualVM2.png)
+![Alt text](/img/Parte1JVisualVM3.png)
 
 - What is the class responsable of that consumption?
 
---->
+---> La clase responsable es StartProduction
 
 2. Write some code in order to solve the CPU's use problems , having in mind  that for now the production is slow and the consumption is fast, check that the CPU consumption has decreased.
+
+![Alt text](/img/Parte1ConsumoCPU1.png)
+![Alt text](/img/Parte1ConsumoCPU2.png)
 
 3. Make a producer that produces as fast as it can, and the consumer consumes slow, keeping in mind that the producer knows a Stock limit (how many elements have to have at most in the queue) your code has to respect that limit.Check the Collection API used as queue in order to validate that the limit not be exceeded.Verify that when you set a small limit in the stock, there is not a high CPU consumption or errors. So that, altogether we are exploring the total of servers
 
@@ -31,7 +35,7 @@ Considering this:
 
 Synchronization and deadlocks
 
-![Alt text](/img/viñeta.png)
+![Alt text](/img/ParteIIviñeta.png)
 
 1. Check the "Highlander-simulator" program, you can find it in edu.eci.arsw.highlandersim package. This is a game in which:
 
@@ -40,10 +44,10 @@ Synchronization and deadlocks
 * Each player, permanently, attacks other inmortal. The firstone who attacks substract m  life points to the opponent, and increase in the same quantity his life points.
 * The game could never have  an unique winner. The most likely thing is that in the end there are only two, fighting forever substracting and adding lifepoints
 
-![Alt text](/img/Highlander.png)
+![Alt text](/img/PARTIIHighlander.png)
 
 ---> solo funciona el boton "Start"
-![Alt text](/img/HighlanderStart.png)
+![Alt text](/img/PARTIIHighlanderStart.png)
 
 2. Check the code and identify how the indicated funcionality was implemented. Given the purpose of the game, an invariant should be that the sum of the life points of all the players always be the same.(Of course, in a moment of time when an operation of increase / reduction of time is not in process). For that case, for N players, what should be that value?
 
@@ -65,7 +69,7 @@ Synchronization and deadlocks
 
 
 6. Identify possible critical regions in regards to the fight of the immortals.Implement a lock strategy to avoid the race conditions. Remember that if you need use two or more 'locks' simultaneously you can use nested sychronized blocks.
-![Alt text](/img/syncLock.png)
+![Alt text](/img/PARTIIsyncLock.png)
 --->
 
 7. After implementing your strategy. Run the program and pay attention if it stops. In that case, use the jps and jstacks programs to identify why the program stops its execution.
