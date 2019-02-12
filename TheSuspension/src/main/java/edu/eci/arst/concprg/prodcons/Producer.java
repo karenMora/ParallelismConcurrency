@@ -38,6 +38,17 @@ public class Producer extends Thread {
             
             try {
                 Thread.sleep(1000);
+                if(queue.size()==stockLimit){
+                    synchronized(queue){
+                    queue.wait();
+                    }
+                }
+                
+                if(queue.size()==(stockLimit/2)){
+                    synchronized(queue){
+                        queue.notifyAll();
+                    }
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }

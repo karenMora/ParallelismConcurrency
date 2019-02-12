@@ -33,7 +33,7 @@ public class StartProduction {
         }
         
         
-        new Consumer(queue).start();
+        new Consumer(queue,Long.MAX_VALUE).start();
     }
     
 
