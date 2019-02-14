@@ -1,5 +1,6 @@
 package edu.eci.arsw.highlandersim;
 
+import com.sun.istack.internal.logging.Logger;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JScrollBar;
 
 public class ControlFrame extends JFrame {
@@ -35,6 +37,9 @@ public class ControlFrame extends JFrame {
     private JLabel statisticsLabel;
     private JScrollPane scrollPane;
     private JTextField numOfImmortals;
+    
+    public static Object lock;
+    public static AtomicInteger pauseInm=new AtomicInteger();
 
     /**
      * Launch the application.
@@ -78,8 +83,8 @@ public class ControlFrame extends JFrame {
                     for (Immortal im : immortals) {
                         im.start();
                         suma+= im.getHealth();
-                        System.out.println("----------------> PUNTOS TOTALES= "+suma);
-                        System.out.println("----------------> VIDA= "+im.getHealth());
+                        //System.out.println("----------------> PUNTOS TOTALES= "+suma);
+                        //System.out.println("----------------> VIDA= "+im.getHealth());
                     }
                 }
                 btnStart.setEnabled(false);
@@ -91,19 +96,16 @@ public class ControlFrame extends JFrame {
         JButton btnPauseAndCheck = new JButton("Pause and check");
         btnPauseAndCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                /*
-				 * COMPLETAR
-                 */
+                for(int i=0; i<immortals.size();i++){
+                    immortals.get(i).pause();
+                }
+                //System.out.println("AUN no funciona Pause and Ckech");
+                System.out.println(pauseInm.get());
                 int sum = 0;
                 for (Immortal im : immortals) {
                     sum += im.getHealth();
                 }
-
                 statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
-                
-                
-
             }
         });
         toolBar.add(btnPauseAndCheck);
@@ -112,9 +114,13 @@ public class ControlFrame extends JFrame {
 
         btnResume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /**
-                 * IMPLEMENTAR
-                 */
+                //JOptionPane.showMessageDialog(rootPane, "AUN no funciona resumme");
+                for(int i=0;i<immortals.size();i++){
+                    immortals.get(i).continuar();
+                }
+                synchronized(lock){
+                    lock.notifyAll();
+                }
 
             }
         });
@@ -131,6 +137,18 @@ public class ControlFrame extends JFrame {
 
         JButton btnStop = new JButton("STOP");
         btnStop.setForeground(Color.RED);
+        
+        btnStop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < immortals.size(); i++) {
+                    immortals.get(i).stopp();
+                    //synchronized(lock){
+                    //    lock.notifyAll();
+                    //}
+                }
+                btnStart.setEnabled(true);
+            }
+        });
         toolBar.add(btnStop);
 
         scrollPane = new JScrollPane();
@@ -156,7 +174,7 @@ public class ControlFrame extends JFrame {
             List<Immortal> il = new LinkedList<Immortal>();
 
             for (int i = 0; i < ni; i++) {
-                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb);
+                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb,i);
                 il.add(i1);
             }
             return il;

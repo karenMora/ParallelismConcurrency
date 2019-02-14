@@ -71,10 +71,6 @@ Synchronization and deadlocks
 
 4. A first hypothesis for presenting the race condition for that function (pause and check) is that the program check the list whose values ​​are going to print, at the same time other threads modify the list's values. In order to solve that write the necessary code to effectively, before print the current results, pause the other threads. Also, implement the resume option.
 
---->
-
---->
-
 5. Verify again the functionality clicking many times. Is the invariant satisfied?
 
 ---> si se cumple si se utilizan variables atomicas y se sincronizan los hilos para mantener la veracidad y la integridad de los valores.
@@ -100,10 +96,8 @@ Analizing how the simulation works. this could create a race condition? Implemen
 Solve the problem identified above without use Sinchronization, cause the sequentiallity of the process would make extremely slow the simulation.
 
 
-
 11. Finally, implement the stop option
 
-![Alt text](/img/)
 
 
 
